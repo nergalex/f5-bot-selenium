@@ -16,7 +16,10 @@ Install
 
 Configuration
 *****************************************
-- Configure F5 *Integrated Bot Defense* to block as a mitigation action and return page below
+- Create an Application Service of F5 *Integrated Bot Defense*
+    - *Shape Endpoints Configuration* >> *Mitigation Action*: block
+    - *Define Mitigation Actions* >> *Response Body*:
+
 .. code-block:: html
 
     <h1 class="page-title">Demo | Blocked by Shape | Demo</h1>
