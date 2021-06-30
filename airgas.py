@@ -119,6 +119,3 @@ if __name__ == "__main__":
 
     unittest.main()
 
-# ChromeDriver response in W3C mode is not standard compliant
-### https://bugs.chromium.org/p/chromedriver/issues/detail?id=1942
-# https://developers.perfectomobile.com/display/TT/How+to+pass+Chrome+options+as+capabilities
