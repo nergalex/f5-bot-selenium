@@ -1,4 +1,6 @@
+import time
 import unittest
+import random
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.keys import Keys
@@ -25,13 +27,11 @@ class PythonOrgSearch(unittest.TestCase):
 
     def test_airgas_login(self):
         self.driver.get("https://www.airgas.com/login")
-        login_email = "demo@hotmail.com"
-        login_password = "demo@hotmail.com!"
 
         # Move
         TouchActions(self.driver).scroll(10, 10).perform()
 
-        # login
+        # GET login
         element_id = "j_username"
         try:
             WebDriverWait(self.driver, 2).until(
@@ -42,25 +42,46 @@ class PythonOrgSearch(unittest.TestCase):
         try:
             element = self.driver.find_element_by_id(element_id)
         except NoSuchElementException:
-            print("Oops!  That was no valid element '%s'.  Try again..." % element_id)
+            print("Oops!  There is no valid element '%s'.  Try again..." % element_id)
+
+        # SET login
         element.clear()
-        element.send_keys(login_email, Keys.ARROW_DOWN)
+        string = []
+        string[:0] = LOGIN_EMAIL
+        for character in string:
+            element.send_keys(character, Keys.ARROW_DOWN)
+            interval = random.uniform(0.1, 0.35)
+            time.sleep(interval)
 
         # Move
         TouchActions(self.driver).tap(element).perform()
-        TouchActions(self.driver).flick_element(element, 100, 100, 50).perform()
+        TouchActions(self.driver).flick_element(
+            on_element=element,
+            xoffset=100,
+            yoffset=100,
+            speed=100
+        ).perform()
 
-        # password
+        # GET password
         element_id = "j_password"
         try:
             element = self.driver.find_element_by_id(element_id)
         except NoSuchElementException:
             print("Oops!  That was no valid element '%s'.  Try again..." % element_id)
+
+        # SET password
         element.clear()
-        element.send_keys(login_password, Keys.PAGE_UP)
+        string = []
+        string[:0] = LOGIN_PASSWORD
+        for character in string:
+            element.send_keys(character)
+            interval = random.uniform(0.1, 0.35)
+            time.sleep(interval)
 
         # submit
         # element.send_keys(Keys.RETURN)
+        interval = random.uniform(0.5, 1)
+        time.sleep(interval)
         self.driver.find_element_by_class_name("login-button").click()
 
         # Check successful login
@@ -93,6 +114,8 @@ class PythonOrgSearch(unittest.TestCase):
 
 if __name__ == "__main__":
     PATH = "./_files/chromedriver.exe"
+    LOGIN_EMAIL = "demo@hotmail.com"
+    LOGIN_PASSWORD = "demo@hotmail.com!"
 
     unittest.main()
 
