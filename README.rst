@@ -14,7 +14,7 @@ Install
 - Install Selenium following `this guide <https://selenium-python.readthedocs.io/installation.html#installation>`_
 - Copy downloaded ``chromedriver.exe`` file in ``./_files/chromedriver.exe`` of your project
 
-Demo
+Run demo
 *****************************************
 
 
