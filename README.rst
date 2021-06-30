@@ -14,6 +14,14 @@ Install
 - Install Selenium following `this guide <https://selenium-python.readthedocs.io/installation.html#installation>`_
 - Copy downloaded ``chromedriver.exe`` file in ``./_files/chromedriver.exe`` of your project
 
+Configuration
+*****************************************
+- Configure F5 *Integrated Bot Defense* to block as a mitigation action and return page below
+.. code-block:: html
+
+    <h1 class="page-title">Demo | Blocked by Shape | Demo</h1>
+
+
 Run demo
 *****************************************
 
