@@ -10,7 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
 
-class PythonOrgSearch(unittest.TestCase):
+class Flow1(unittest.TestCase):
 
     def setUp(self):
         options = webdriver.ChromeOptions()
@@ -25,8 +25,8 @@ class PythonOrgSearch(unittest.TestCase):
             options=options
         )
 
-    def test_airgas_login(self):
-        self.driver.get("https://www.airgas.com/login")
+    def test_login(self):
+        self.driver.get(URI)
 
         # Move
         TouchActions(self.driver).scroll(10, 10).perform()
@@ -38,11 +38,11 @@ class PythonOrgSearch(unittest.TestCase):
                 expected_conditions.presence_of_element_located((By.ID, element_id))
             )
         except TimeoutException:
-            print("Oops!  Too long to retrieve element '%s'.  Try again..." % element_id)
+            print("Oops!  Too long to retrieve element '%s'" % element_id)
         try:
             element = self.driver.find_element_by_id(element_id)
         except NoSuchElementException:
-            print("Oops!  There is no valid element '%s'.  Try again..." % element_id)
+            print("Oops!  There is no valid element '%s'" % element_id)
 
         # SET login
         element.clear()
@@ -67,7 +67,7 @@ class PythonOrgSearch(unittest.TestCase):
         try:
             element = self.driver.find_element_by_id(element_id)
         except NoSuchElementException:
-            print("Oops!  That was no valid element '%s'.  Try again..." % element_id)
+            print("Oops!  That was no valid element '%s'" % element_id)
 
         # SET password
         element.clear()
@@ -94,17 +94,18 @@ class PythonOrgSearch(unittest.TestCase):
         except TimeoutException:
             unknown_credential = True
 
+        # Check Shape mitigation
         if unknown_credential:
-            # Check Shape mitigation
             element_class = "page-title"
             try:
                 element = self.driver.find_element_by_class_name(element_class)
             except TimeoutException:
-                print("Oops!  That was no valid element '%s'. Review code" % element_id)
+                print("Oops!  That was no valid element '%s'" % element_id)
             if element.text == "Demo | Blocked by Shape | Demo":
                 print("Shape mitigation: %s" % element.text)
             else:
                 print("Oops!  unknown element '%s'. Review code" % element_id)
+
         else:
             print("Unknown credential by system '%s', value '%s'. Try another credential..." % (element_class, element.text))
 
@@ -116,6 +117,7 @@ if __name__ == "__main__":
     PATH = "./_files/chromedriver.exe"
     LOGIN_EMAIL = "demo@hotmail.com"
     LOGIN_PASSWORD = "demo@hotmail.com!"
+    URI = "YourINPUT"
 
     unittest.main()
 
