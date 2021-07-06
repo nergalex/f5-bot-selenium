@@ -17,7 +17,6 @@ Install
     - ``selenium``
 - Go to directory where python binary is stored and then install 2captha ``.\pip3.exe install 2captcha-python``
 
-
 Configuration
 *****************************************
 - Create an Application Service of F5 *Integrated Bot Defense*
@@ -28,15 +27,11 @@ Configuration
 
     <h1 class='page-title'>Demo | Blocked by Shape | Demo</h1>
 
-
 Run demo
 *****************************************
-
-
-
-
-
-
+- Open a file ``websiteX.py``
+- In the bottom, replace ``INPUT`` value
+- Run script
 
 
 
