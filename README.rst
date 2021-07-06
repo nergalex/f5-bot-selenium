@@ -26,7 +26,7 @@ Configuration
 
 .. code-block:: html
 
-    <h1 class="page-title">Demo | Blocked by Shape | Demo</h1>
+    <h1 class='page-title'>Demo | Blocked by Shape | Demo</h1>
 
 
 Run demo

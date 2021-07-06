@@ -6,6 +6,7 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.touch_actions import TouchActions
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
@@ -18,12 +19,17 @@ class Flow1(unittest.TestCase):
         options.add_argument("--disable-web-security")
         options.add_argument("--allow-insecure-localhost")
         options.add_argument("--ignore-urlfetcher-cert-requests")
+        options.add_argument("--show-taps")
+        options.add_argument("--auto-open-devtools-for-tabs")
         options.add_experimental_option('w3c', False)
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        options.add_experimental_option('useAutomationExtension', False)
 
         self.driver = webdriver.Chrome(
             executable_path=PATH,
             options=options
         )
+        print(self.driver.execute_script("return navigator.userAgent;"))
 
     def test_login(self):
         self.driver.get(URI)
@@ -32,7 +38,7 @@ class Flow1(unittest.TestCase):
         TouchActions(self.driver).scroll(10, 10).perform()
 
         # GET login
-        element_id = "j_username"
+        element_id = "input-1"
         try:
             WebDriverWait(self.driver, 2).until(
                 expected_conditions.presence_of_element_located((By.ID, element_id))
@@ -45,6 +51,9 @@ class Flow1(unittest.TestCase):
             print("Oops!  There is no valid element '%s'" % element_id)
 
         # SET login
+        interval = random.uniform(1.1, 1.5)
+        time.sleep(interval)
+        ActionChains(self.driver).move_to_element(element).pause(interval).click(element).perform()
         element.clear()
         string = []
         string[:0] = LOGIN_EMAIL
@@ -63,13 +72,16 @@ class Flow1(unittest.TestCase):
         ).perform()
 
         # GET password
-        element_id = "j_password"
+        element_id = "input-2"
         try:
             element = self.driver.find_element_by_id(element_id)
         except NoSuchElementException:
             print("Oops!  That was no valid element '%s'" % element_id)
 
         # SET password
+        interval = random.uniform(1.1, 1.5)
+        time.sleep(interval)
+        ActionChains(self.driver).move_to_element(element).pause(interval).click(element).perform()
         element.clear()
         string = []
         string[:0] = LOGIN_PASSWORD
@@ -79,36 +91,32 @@ class Flow1(unittest.TestCase):
             time.sleep(interval)
 
         # submit
-        # element.send_keys(Keys.RETURN)
+        element_class = "btn-primary"
+        try:
+            element = self.driver.find_element_by_class_name(element_class)
+        except NoSuchElementException:
+            print("Oops!  That was no valid element '%s'" % element_class)
         interval = random.uniform(0.5, 1)
         time.sleep(interval)
-        self.driver.find_element_by_class_name("login-button").click()
+        ActionChains(self.driver).move_to_element(element).pause(interval).click(element).perform()
 
-        # Check successful login
-        element_class = "js-msg"
-        unknown_credential = False
+        # CHECK successful login
+        element_class = "d-xl-inline-block"
+        successful_login = True
         try:
             element = WebDriverWait(self.driver, 3).until(
                 expected_conditions.presence_of_element_located((By.CLASS_NAME, element_class))
             )
         except TimeoutException:
-            unknown_credential = True
+            successful_login = False
 
-        # Check Shape mitigation
-        if unknown_credential:
-            element_class = "page-title"
-            try:
-                element = self.driver.find_element_by_class_name(element_class)
-            except NoSuchElementException:
-                print("Oops!  That was no valid element '%s'" % element_class)
-            if element.text == "Demo | Blocked by Shape | Demo":
-                print("Shape mitigation: %s" % element.text)
-            else:
-                print("Oops!  unknown element '%s'. Review code" % element_class)
-
-        # Check
+        # SHOW result
+        if successful_login:
+            print("Successful login!")
         else:
-            print("Unknown credential by system '%s', value '%s'. Try another credential..." % (element_class, element.text))
+            print("Unknown credential by system or mitigated by Shape. Check /v1/login response in Dev Tool")
+
+        time.sleep(1000)
 
     def tearDown(self):
         self.driver.close()
@@ -116,9 +124,15 @@ class Flow1(unittest.TestCase):
 
 if __name__ == "__main__":
     PATH = "./_files/chromedriver.exe"
-    LOGIN_EMAIL = "demo@hotmail.com"
-    LOGIN_PASSWORD = "demo@hotmail.com!"
-    URI = "INPUT"
+    LOGIN_EMAIL = "INPUT"
+    LOGIN_PASSWORD = "INPUT"
+    URI = "https://arcadia-crypto1.f5app.dev/login"
 
     unittest.main()
+
+
+
+
+
+
 

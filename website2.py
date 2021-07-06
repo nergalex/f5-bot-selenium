@@ -107,7 +107,7 @@ class Flow1(unittest.TestCase):
         if captcha_exist:
             pprint.pprint("https://onlinepngtools.com/convert-base64-to-png : %s" % element.screenshot_as_base64)
             try:
-                # captcha_result = Maif.captchaSolver(image=element.screenshot_as_base64)
+                # captcha_result = Flow1.captchaSolver(image=element.screenshot_as_base64)
                 captcha_result = solver.normal(
                         element.screenshot_as_base64,
                         numeric=0,
@@ -130,13 +130,14 @@ class Flow1(unittest.TestCase):
                 print("No CAPTCHA input field?!  That was no valid element '%s'" % element_id)
 
         # SET captcha
-        element.clear()
-        string = []
-        string[:0] = captcha_result['code']
-        for character in string:
-            element.send_keys(character)
-            interval = random.uniform(0.1, 0.35)
-            time.sleep(interval)
+        if captcha_exist:
+            element.clear()
+            string = []
+            string[:0] = captcha_result['code']
+            for character in string:
+                element.send_keys(character)
+                interval = random.uniform(0.1, 0.35)
+                time.sleep(interval)
 
         # submit
         self.driver.switch_to.default_content()
@@ -196,8 +197,8 @@ if __name__ == "__main__":
     PATH = "./_files/chromedriver.exe"
     LOGIN_EMAIL = "demo@hotmail.com"
     LOGIN_PASSWORD = "demo@hotmail.com!"
-    URI = "YourINPUT"
-    CAPTCHA_API_KEY = "YourINPUT"
+    URI = "INPUT"
+    CAPTCHA_API_KEY = "INPUT"
     config = {
         'server': '2captcha.com',
         'apiKey': CAPTCHA_API_KEY,
