@@ -133,6 +133,7 @@ _________________________________________
 Configure Integrated Bot Defense
 =========================================
 *Task*
+
     - View detected human and bot transaction in ``Cloud Services`` >> ``IBD`` >> ``Dashboard``
     - Get BIG-IP credential: ``UDF`` >>` `Components`` >> ``BIG-IP`` >> ``Details`` >> ``Credentials``
     - Connect to BIG-IP: ``UDF`` >>` `Components`` >> ``BIG-IP`` >> ``Access`` >> ``TMUI``
