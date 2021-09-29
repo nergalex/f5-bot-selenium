@@ -9,8 +9,6 @@ Selenium bot
 .. contents:: Contents
     :local:
 
-11. UDF lab Add-on
-##############################################################
 
 Local environment
 *****************************************
