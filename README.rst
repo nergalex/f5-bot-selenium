@@ -40,7 +40,7 @@ Test 1 - Human
     - Paste *Hackazon URI* and append PATH ``/user/login``
     - Try to login using the user credential and solving the CAPTCHA
 
-*output*
+*Result*
     - You have been redirected to ``/account``
 
 *Clean*
@@ -48,24 +48,28 @@ Test 1 - Human
 
 Google recaptcha API key
 =========================================
-- A Google Recaptcha account has been already created
-- A ``site key`` and a ``secret key`` was added in Application's code.
-- Use `2captcha user guide <https://2captcha.com/2captcha-api#solving_recaptchav2_new>`_ to find the ``site key``
-- For trainer: statistics are available `here <https://www.google.com/recaptcha/admin/site/479852569>`_
+A Google Recaptcha account has been already created.
+A ``site key`` and a ``secret key`` was added in Application's code.
+
+*Task*
+    - Use `2captcha user guide <https://2captcha.com/2captcha-api#solving_recaptchav2_new>`_ to find the ``site key``
+
+*Note*
+    - For trainer: statistics are available `here <https://www.google.com/recaptcha/admin/site/479852569>`_
 
 Selenium bot - bypass CAPTCHA, viva 2CATPCHA!
 =============================================
 *Task*
 
-- In PyCharm, open ``website11.py``
-- Click on ``Structure`` and open ``setUp`` function
+    - In PyCharm, open ``website11.py``
+    - Click on ``Structure`` and open ``setUp`` function
 
 .. image:: ./_pictures/Structure_setUp.png
    :align: center
    :width: 300
    :alt: setUp
 
-- Set global variables
+    - Set global variables
 
 .. code-block:: bash
         URI = "https://{{your_hackazon_uri}}/user/login"
@@ -73,48 +77,45 @@ Selenium bot - bypass CAPTCHA, viva 2CATPCHA!
         LOGIN_PASSWORD = "123456"
         CAPTCHA_API_KEY = "{{ask_your_trainer}}"
 
-- Set global variables
-
-- Click on the left column, as described in the picture below, to suspend the script during his future execution
+    - Click on the left column, as described in the picture below, to suspend the script during his future execution
 
 .. image:: ./_pictures/suspend.png
    :align: center
    :width: 300
    :alt: setUp
 
-- Go to the end of the file and click on the green triangle
+    - Go to the end of the file and click on the green triangle
 
 .. image:: ./_pictures/run_test.png
    :align: center
    :width: 300
    :alt: setUp
 
-- Choose debug mode
+    - Choose debug mode
 
 .. image:: ./_pictures/run_test_debug.png
    :align: center
    :width: 300
    :alt: debug
 
-- The script launch a Web browser controlled by Selenium
-
-- Just for your understanding, when the script is suspended, locate the element in the Web browser's dev tool windows >> Elements tab
-
-- Execute next action by clinking on "go to cursor"
+    - The script launch a Web browser controlled by Selenium
+    - Just for your understanding, when the script is suspended, locate the element in the Web browser's dev tool windows >> Elements tab
+    - Execute next action by clinking on "go to cursor"
 
 .. image:: ./_pictures/debug_continue.png
    :align: center
    :width: 300
    :alt: go to cursor
 
-*output*
+*Result*
     - Bot succeed to login and he is redirected to ``/account``
 
 Configure Integrated Bot Defense
 =========================================
-- Get BIG-IP credential: ``UDF`` >>` `Components`` >> ``BIG-IP`` >> ``Details`` >> ``Credentials``
-- Connect to BIG-IP: ``UDF`` >>` `Components`` >> ``BIG-IP`` >> ``Access`` >> ``TMUI``
-- Open IBD iApp: ``iApps`` >>` `App Services`` >> ``Hackazon_IBD`` >> ``Reconfigure``
+*Task*
+    - Get BIG-IP credential: ``UDF`` >>` `Components`` >> ``BIG-IP`` >> ``Details`` >> ``Credentials``
+    - Connect to BIG-IP: ``UDF`` >>` `Components`` >> ``BIG-IP`` >> ``Access`` >> ``TMUI``
+    - Open IBD iApp: ``iApps`` >>` `App Services`` >> ``Hackazon_IBD`` >> ``Reconfigure``
 - Set parameters:
     - Entry points | JS Injection Paths: GET ``/user/login``
     - Endpoints | Paths to be Routed to Shape >> Host ``HOST_of_your_hackazon_URI``
@@ -130,15 +131,15 @@ Configure Integrated Bot Defense
 Selenium bot - mitigated
 =============================================
 *Task*
-- In PyCharm, run a test
+    - In PyCharm, run a test
 
 .. image:: ./_pictures/run_test_without_debug.png
    :align: center
    :width: 300
    :alt: debug
 
-*output*
-- See page ``Demo | Blocked by Shape | Demo``
+*Results*
+    - See page ``Demo | Blocked by Shape | Demo``
 
 
 
