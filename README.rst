@@ -190,6 +190,7 @@ To handle this use case:
 - Update the iRule ``iRule_CORS.tcl`` with header names and iapp_name (i.e. Application Service name)
 
 Reference:
+
 - `CORS <https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS>`_
 - `Access-Control-Allow-Headers <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers>`_
 
@@ -203,17 +204,19 @@ In a Cross-Origin use case, the `window.postMessage() <https://developer.mozilla
 
 The objective to handle this use case is to:
 
-    - 1. Add a listener `EventTarget.addEventListener() <https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener>`_ on the 3rd party page, that will get useful info on CAPTCHA and send back info to the source caller using `window.postMessage() <https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage>`_
-    - 2. On the main page, Add a listener `EventTarget.addEventListener() <https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener>`_ to catch the response back and write it in the page, for example in the 3rd party's iframe attribute
-    - 3. On the main page, call the listener to do action using `window.postMessage() <https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage>`_
+    1. Add a listener `EventTarget.addEventListener() <https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener>`_ on the 3rd party page, that will get useful info on CAPTCHA and send back info to the source caller using `window.postMessage() <https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage>`_
+    2. On the main page, Add a listener `EventTarget.addEventListener() <https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener>`_ to catch the response back and write it in the page, for example in the 3rd party's iframe attribute
+    3. On the main page, call the listener to do action using `window.postMessage() <https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage>`_
 
 Configuration for step 1:
 - Create a profiles >> Content >> HTML >> rule ``captcha-delivery_postMessage``
     - Match settings >> Match Tag Name: body
     - Action settings >> HTML to Append: ``<script> {{ copy paste ./files/iframe_cors_bypass-listener.js }} </script>``
+
 - Create a profiles >> Content >> HTML ``captcha-delivery``
     - Content settings: ``text/html text/xhtml``
     - HTML rules: ``captcha-delivery_postMessage``
+
 - Create a VS to listen on 3rd party domain and attach HTML profile ``captcha-delivery``
 
 Configuration for step 2 and 3: view ``website7.py`` as an example
