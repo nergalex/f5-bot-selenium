@@ -184,8 +184,10 @@ In that preflight, the browser sends headers that indicate the HTTP method and h
 To handle this use case:
 
 - Attach IBD to 2 VS:
-    - 1) VS of the landing web site
-    - 2) VS of the authentication API endpoint web site
+
+    1. VS of the landing web site
+    2. VS of the authentication API endpoint web site
+
 - Collect IBD header names in a same domain transaction
 - Update the iRule ``iRule_CORS.tcl`` with header names and iapp_name (i.e. Application Service name)
 
