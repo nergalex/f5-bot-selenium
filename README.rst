@@ -74,15 +74,15 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
 ======================================================
 *Task*
 
-    - In PyCharm, open ``website11.py``
-    - Click on ``Structure`` and open ``setUp`` function
+- In PyCharm, open ``website11.py``
+- Click on ``Structure`` and open ``setUp`` function
 
 .. image:: ./_pictures/Structure_setUp.png
    :align: center
    :width: 300
    :alt: setUp
 
-    - Set global variables
+- Set global variables
 
 .. code-block:: bash
         URI = "https://{{your_hackazon_uri}}/user/login"
@@ -90,42 +90,42 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
         LOGIN_PASSWORD = "123456"
         CAPTCHA_API_KEY = "{{ask_your_trainer}}"
 
-    - Click on the left column, as described in the picture below, to suspend the script during his future execution
+- Click on the left column, as described in the picture below, to suspend the script during his future execution
 
 .. image:: ./_pictures/suspend.png
    :align: center
    :width: 300
    :alt: setUp
 
-    - Go to the end of the file and click on the green triangle
+- Go to the end of the file and click on the green triangle
 
 .. image:: ./_pictures/run_test.png
    :align: center
    :width: 300
    :alt: setUp
 
-    - Choose debug mode
+- Choose debug mode
 
 .. image:: ./_pictures/run_test_debug.png
    :align: center
    :width: 300
    :alt: debug
 
-    - The script launch a Web browser controlled by Selenium
-    - Just for your understanding, when the script is suspended, locate the element in the Web browser's dev tool windows >> Elements tab
-    - Execute next action by clinking on "go to cursor"
+- The script launch a Web browser controlled by Selenium
+- Just for your understanding, when the script is suspended, locate the element in the Web browser's dev tool windows >> Elements tab
+- Execute next action by clinking on "go to cursor"
 
 .. image:: ./_pictures/debug_continue.png
    :align: center
    :width: 300
    :alt: go to cursor
 
-    - When element ``loginbtn`` is suspended, add a Filter on transaction to catch it: ``Chrome`` >> ``DevTool`` >> ``Network`` >> filter ``method: POST``
-    - "Go to cursor" and then see the POST request: note all the headers used to forward signal data to IBD
+- When element ``loginbtn`` is suspended, add a Filter on transaction to catch it: ``Chrome`` >> ``DevTool`` >> ``Network`` >> filter ``method: POST``
+- "Go to cursor" and then see the POST request: note all the headers used to forward signal data to IBD
 
 *Result*
 
-    - Bot succeed to login and he is redirected to ``/account``
+- Bot succeed to login and he is redirected to ``/account``
 
 _________________________________________
 
