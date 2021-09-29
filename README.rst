@@ -40,14 +40,17 @@ _________________________________________
 Test 1 - Human
 =========================================
 *Task*
+
     - Open a web browser
     - Paste *Hackazon URI* and append PATH ``/user/login``
     - Try to login using the user credential and solving the CAPTCHA
 
 *Result*
+
     - You have been redirected to ``/account``
 
 *Clean*
+
     - Logout
 
 _________________________________________
@@ -58,9 +61,11 @@ A Google Recaptcha account has been already created.
 A ``site key`` and a ``secret key`` was added in Application's code.
 
 *Task*
+
     - Use `2captcha user guide <https://2captcha.com/2captcha-api#solving_recaptchav2_new>`_ to find the ``site key``
 
 *Note*
+
     - For trainer: statistics are available `here <https://www.google.com/recaptcha/admin/site/479852569>`_
 
 _________________________________________
@@ -116,6 +121,7 @@ Selenium bot - bypass CAPTCHA, viva 2CATPCHA!
    :alt: go to cursor
 
 *Result*
+
     - Bot succeed to login and he is redirected to ``/account``
 
 _________________________________________
@@ -123,10 +129,13 @@ _________________________________________
 Configure Integrated Bot Defense
 =========================================
 *Task*
+
     - Get BIG-IP credential: ``UDF`` >>` `Components`` >> ``BIG-IP`` >> ``Details`` >> ``Credentials``
     - Connect to BIG-IP: ``UDF`` >>` `Components`` >> ``BIG-IP`` >> ``Access`` >> ``TMUI``
     - Open IBD iApp: ``iApps`` >>` `App Services`` >> ``Hackazon_IBD`` >> ``Reconfigure``
+
 - Set parameters:
+
     - Entry points | JS Injection Paths: GET ``/user/login``
     - Endpoints | Paths to be Routed to Shape >> Host ``HOST_of_your_hackazon_URI``
     - Endpoints | Paths to be Routed to Shape >> Mitigation Action ``block``
@@ -136,13 +145,14 @@ Configure Integrated Bot Defense
 
     <h1 class='page-title'>Demo | Blocked by Shape | Demo</h1>
 
-- Click on ``Finished`` to reconfigure
+    - Click on ``Finished`` to reconfigure
 
 _____________________________________________
 
 Selenium bot - mitigated
 =============================================
 *Task*
+
     - In PyCharm, run a test
 
 .. image:: ./_pictures/run_test_without_debug.png
@@ -151,6 +161,7 @@ Selenium bot - mitigated
    :alt: debug
 
 *Results*
+
     - See page ``Demo | Blocked by Shape | Demo``
 
 
