@@ -150,7 +150,7 @@ Configure Integrated Bot Defense
 
 - Click on ``Finished`` to reconfigure
 - Connect to BIG-IP using SSH: ``UDF`` >>` `Components`` >> ``BIG-IP`` >> ``Access`` >> ``Web shell``
-- Drop all connection
+- Drop all connection:
 
 .. code-block:: bash
 
