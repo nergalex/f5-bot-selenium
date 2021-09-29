@@ -9,9 +9,11 @@ Selenium bot
 .. contents:: Contents
     :local:
 
+11. UDF lab Add-on
+*****************************************
 
 Local environment
-*****************************************
+=========================================
 - Install `Python <https://www.python.org/>`_
 - Install `PyCharm <https://www.jetbrains.com/pycharm/>`_
 - Open PyCharm
@@ -174,7 +176,7 @@ Test 3 - bot - mitigated
     - View mitigated bot transaction in ``Cloud Services`` >> ``IBD`` >> ``Dashboard``
 
 Cross-Origin Resource Sharing (CORS)
-##############################################################
+************************************
 A web site could have an authentication API endpoint hosted in another domain.
 In this case, web browser make a "preflight" request to the server hosting the cross-origin resource, in order to check that the server will permit the actual request.
 In that preflight, the browser sends headers that indicate the HTTP method and headers that will be used in the actual request.
@@ -195,7 +197,7 @@ Reference:
 - `Access-Control-Allow-Headers <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers>`_
 
 Cross-Origin Communication
-##############################################################
+************************************
 A web site could delegate its authentication mechanism to a 3rd party.
 In the rendered web page, an iframe - managed by the 3rd party hosted in another domain - display a CAPTCHA.
 
