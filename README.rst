@@ -145,7 +145,7 @@ Configure Integrated Bot Defense
 
     <h1 class='page-title'>Demo | Blocked by Shape | Demo</h1>
 
-    - Click on ``Finished`` to reconfigure
+- Click on ``Finished`` to reconfigure
 
 _____________________________________________
 
