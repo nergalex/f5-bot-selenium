@@ -25,6 +25,8 @@ Local environment
 - Open file ``requirements.txt`` and install package ``selenium``
 - Go to directory where python binary is stored and then install 2captcha ``.\pip3.exe install 2captcha-python``
 
+_________________________________________
+
 Remote environment
 =========================================
 - Deploy the blueprint ``Advanced WAF Demo v16 + LCC, ML, Device ID+ and IBD`` / version of 30/09/2021 and after
@@ -32,6 +34,8 @@ Remote environment
 - Get Hackazon URI: ``Components`` >> ``BIG-IP`` >> ``Details`` >> ``Access methods`` >> ``IBD Demo with Hackazon as backend`` >> ``External``
 - Get Hackazon user credential (login and passowrd) : ``Components`` >> ``LAMP-server`` >> ``Details`` >> ``Access methods`` >> ``Description`` >> <login>/<password>
 - Open the e-mail received from Cloud Services and connect to IBD portal
+
+_________________________________________
 
 Test 1 - Human
 =========================================
@@ -46,6 +50,8 @@ Test 1 - Human
 *Clean*
     - Logout
 
+_________________________________________
+
 Google recaptcha API key
 =========================================
 A Google Recaptcha account has been already created.
@@ -56,6 +62,8 @@ A ``site key`` and a ``secret key`` was added in Application's code.
 
 *Note*
     - For trainer: statistics are available `here <https://www.google.com/recaptcha/admin/site/479852569>`_
+
+_________________________________________
 
 Selenium bot - bypass CAPTCHA, viva 2CATPCHA!
 =============================================
@@ -110,6 +118,8 @@ Selenium bot - bypass CAPTCHA, viva 2CATPCHA!
 *Result*
     - Bot succeed to login and he is redirected to ``/account``
 
+_________________________________________
+
 Configure Integrated Bot Defense
 =========================================
 *Task*
@@ -127,6 +137,8 @@ Configure Integrated Bot Defense
     <h1 class='page-title'>Demo | Blocked by Shape | Demo</h1>
 
 - Click on ``Finished`` to reconfigure
+
+_____________________________________________
 
 Selenium bot - mitigated
 =============================================
