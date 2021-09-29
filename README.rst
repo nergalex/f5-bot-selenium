@@ -84,11 +84,13 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
 
 - Set global variables
 
+
 .. code-block:: bash
         URI = "https://{{your_hackazon_uri}}/user/login"
         LOGIN_USER = "test_user"
         LOGIN_PASSWORD = "123456"
         CAPTCHA_API_KEY = "{{ask_your_trainer}}"
+
 
 - Click on the left column, as described in the picture below, to suspend the script during his future execution
 
