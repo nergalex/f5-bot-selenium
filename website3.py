@@ -64,12 +64,10 @@ class Flow1(unittest.TestCase):
         try:
             element = self.driver.find_element_by_class_name(element_name)
         except NoSuchElementException:
-            print("Oops!  There is no valid element '%s'" % element_id)
+            print("Oops!  There is no valid element '%s'" % element_name)
         interval = random.uniform(1.1, 1.5)
         time.sleep(interval)
         ActionChains(self.driver).move_to_element(element).pause(interval).click(element).perform()
-
-        time.sleep(10)
 
         # GET login
         element_id = "mat-input-0"

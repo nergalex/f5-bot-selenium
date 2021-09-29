@@ -171,6 +171,8 @@ class Flow1(unittest.TestCase):
         if unknown_credential and not shape_mitigation:
             print("Unknown credential by system '%s'. Try another credential..." % element.text)
 
+        time.sleep(1000)
+
     def tearDown(self):
         self.driver.close()
 

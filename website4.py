@@ -126,7 +126,7 @@ if __name__ == "__main__":
     PATH = "./_files/chromedriver.exe"
     LOGIN_EMAIL = "INPUT"
     LOGIN_PASSWORD = "INPUT"
-    URI = "https://arcadia-crypto1.f5app.dev/login"
+    URI = "INPUT"
 
     unittest.main()
 
