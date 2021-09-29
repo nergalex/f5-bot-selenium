@@ -19,7 +19,8 @@ Local environment
 - Open PyCharm
     - Create a new project by cloning this github repository
     - Attach a `Python interpreter <https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html>`_
-- Install Selenium following `this guide <https://selenium-python.readthedocs.io/installation.html#installation>`_
+- Download `here <https://sites.google.com/a/chromium.org/chromedriver/downloads>`_ same Chrome driver as your Chrome browser ``chrome://settings/help``
+- OPTION: for other browser, follow `this guide <https://selenium-python.readthedocs.io/installation.html#installation>`_
 - Copy downloaded ``chromedriver.exe`` file in ``./_files/chromedriver.exe`` of your project
 - Open file ``requirements.txt`` and install package ``selenium``
 - Go to directory where python binary is stored and then install 2captcha ``.\pip3.exe install 2captcha-python``
