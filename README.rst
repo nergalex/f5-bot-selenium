@@ -68,10 +68,10 @@ A ``site key`` and a ``secret key`` was added in Application's code.
 
     - For trainer: statistics are available `here <https://www.google.com/recaptcha/admin/site/479852569>`_
 
-_________________________________________
+______________________________________________________
 
-Selenium bot - bypass CAPTCHA, viva 2CATPCHA!
-=============================================
+Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
+======================================================
 *Task*
 
     - In PyCharm, open ``website11.py``
@@ -149,7 +149,7 @@ Configure Integrated Bot Defense
 
 _____________________________________________
 
-Selenium bot - mitigated
+Test 3 - bot - mitigated
 =============================================
 *Task*
 
