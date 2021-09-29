@@ -209,11 +209,14 @@ The objective to handle this use case is to:
     3. On the main page, call the listener to do action using `window.postMessage() <https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage>`_
 
 Configuration for step 1:
+
 - Create a profiles >> Content >> HTML >> rule ``captcha-delivery_postMessage``
+
     - Match settings >> Match Tag Name: body
     - Action settings >> HTML to Append: ``<script> {{ copy paste ./files/iframe_cors_bypass-listener.js }} </script>``
 
 - Create a profiles >> Content >> HTML ``captcha-delivery``
+
     - Content settings: ``text/html text/xhtml``
     - HTML rules: ``captcha-delivery_postMessage``
 
