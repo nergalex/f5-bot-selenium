@@ -95,7 +95,7 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
 
 .. image:: ./_pictures/suspend.png
    :align: center
-   :width: 300
+   :width: 500
    :alt: setUp
 
 - Go to the end of the file and click on the green triangle
@@ -118,7 +118,7 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
 
 .. image:: ./_pictures/debug_continue.png
    :align: center
-   :width: 300
+   :width: 400
    :alt: go to cursor
 
 - When element ``loginbtn`` is suspended, add a Filter on transaction to catch it: ``Chrome`` >> ``DevTool`` >> ``Network`` >> filter ``method: POST``
@@ -168,7 +168,7 @@ Test 3 - bot - mitigated
 
 .. image:: ./_pictures/run_test_without_debug.png
    :align: center
-   :width: 300
+   :width: 400
    :alt: debug
 
 *Results*
