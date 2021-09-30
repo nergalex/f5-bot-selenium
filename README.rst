@@ -21,12 +21,23 @@ Local environment
     - Attach a `Python interpreter <https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html>`_
 - Download `here <https://sites.google.com/a/chromium.org/chromedriver/downloads>`_ same Chrome driver as your Chrome browser ``chrome://settings/help``
 - OPTION: for other browser, follow `this guide <https://selenium-python.readthedocs.io/installation.html#installation>`_
-- Copy downloaded ``chromedriver.exe`` file in ``./_files/chromedriver.exe`` of your project
-- Open file ``requirements.txt`` and install packages
-- If you encounter an error during *2captcha-python* installation, do:
-    - In PyCharm, at the bottom left of the window, open a terminal
-    - move to directory where your Python environment is installed
-    - Install 2captcha ``.\pip3.exe install 2captcha-python==1.1.0``
+- Copy downloaded ``chromedriver(.exe)`` file in ``./_files/chromedriver.exe`` of your project
+- For MacOS only, allow ``chromedriver`` as described `here <https://stackoverflow.com/questions/60362018/macos-catalinav-10-15-3-error-chromedriver-cannot-be-opened-because-the-de>`_:
+
+.. code-block:: bash
+
+    xattr -d com.apple.quarantine chromedriver
+
+- Open file ``requirements.txt`` and install packages:
+
+    - selenium
+    - requests
+
+- Install *2captcha-python* package: at the bottom left of the window, open a Terminal
+
+.. code-block:: bash
+
+    pip3.exe install 2captcha-python==1.1.0
 
 _________________________________________
 
