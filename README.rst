@@ -1,4 +1,4 @@
-Selenium bot
+Unidentified Filching Object | OVNI
 ##############################################################
 
 .. image:: ./_pictures/UFO_mamy.png
@@ -22,8 +22,11 @@ Local environment
 - Download `here <https://sites.google.com/a/chromium.org/chromedriver/downloads>`_ same Chrome driver as your Chrome browser ``chrome://settings/help``
 - OPTION: for other browser, follow `this guide <https://selenium-python.readthedocs.io/installation.html#installation>`_
 - Copy downloaded ``chromedriver.exe`` file in ``./_files/chromedriver.exe`` of your project
-- Open file ``requirements.txt`` and install package ``selenium``
-- Go to directory where python binary is stored and then install 2captcha ``.\pip3.exe install 2captcha-python``
+- Open file ``requirements.txt`` and install packages
+- If you encounter an error during *2captcha-python* installation, do:
+    - In PyCharm, at the bottom left of the window, open a terminal
+    - move to directory where your Python environment is installed
+    - Install 2captcha ``.\pip3.exe install 2captcha-python==1.1.0``
 
 _________________________________________
 
@@ -128,6 +131,9 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
 
 - Bot succeed to login and he is redirected to ``/account``
 
+*Clean*
+
+    - In PyCharm, stop the script by clicking
 _________________________________________
 
 Configure Integrated Bot Defense
