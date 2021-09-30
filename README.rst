@@ -15,7 +15,7 @@ Unidentified Filching Object | OVNI
 Local environment
 =========================================
 - Install `Python <https://www.python.org/>`_
-- Install `PyCharm <https://www.jetbrains.com/pycharm/>`_
+- Install `PyCharm <https://www.jetbrains.com/pycharm/>`_ community edition
 - Open PyCharm
     - Create a new project by cloning this github repository
     - Attach a `Python interpreter <https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html>`_
