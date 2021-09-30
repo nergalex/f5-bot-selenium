@@ -46,7 +46,7 @@ Remote environment
 - Deploy the blueprint ``Advanced WAF Demo v16 + LCC, ML, Device ID+ and IBD`` / version of 30/09/2021 and after
 - Start the deployment ``Advanced WAF Demo v16 + LCC, ML, Device ID+ and IBD``
 - Get Hackazon URI: ``Components`` >> ``BIG-IP`` >> ``Details`` >> ``Access methods`` >> ``IBD Demo with Hackazon as backend`` >> ``External``
-- Get Hackazon user credential (login and passowrd) : ``Components`` >> ``LAMP-server`` >> ``Details`` >> ``Access methods`` >> ``Description`` >> <login>/<password>
+- Get Hackazon user credential (login and passowrd) : ``Components`` >> ``LAMP-server`` >> ``Documentation`` >> ``Access methods`` >> ``Description`` >> <login>/<password>
 - Open the e-mail received from Cloud Services and connect to IBD portal
 
 _________________________________________
