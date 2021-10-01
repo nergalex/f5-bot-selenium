@@ -144,6 +144,9 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
    :width: 400
    :alt: go to cursor
 
+- When element ``loginbtn`` is suspended, add a Filter on transaction to catch it: ``Chrome`` >> ``DevTool`` >> ``Network`` >> filter ``method:POST``
+- "Go to cursor" and then see the POST request: note the ``g-recaptcha-response`` info in the form request
+
 *Result*
 
 - Bot succeed to login and he is redirected to ``/account``
