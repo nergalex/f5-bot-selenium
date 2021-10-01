@@ -167,7 +167,7 @@ Configure Integrated Bot Defense
     - Connect to BIG-IP: ``UDF`` >>` `Components`` >> ``BIG-IP`` >> ``Access`` >> ``TMUI``
     - Open IBD iApp: ``iApps`` >>` `App Services`` >> ``Hackazon_IBD`` >> ``Reconfigure``
     - Set parameters:
-        - Entry points | JS Injection Paths (GET): ``/user/login``
+        - Entry points | JS Injection Paths in specific Webpages only (GET): ``/user/login``
         - Endpoints | Paths to be Routed to Shape >>
             - Host ``HOST_of_your_hackazon_URI``
             - Endpoint ``/user/login``
