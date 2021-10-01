@@ -17,7 +17,7 @@ Local environment
 - Install `Python <https://www.python.org/>`_
 - Install `PyCharm <https://www.jetbrains.com/pycharm/>`_ community edition
 - Open PyCharm
-    - Create a new project by cloning this github repository
+    - Create a new project ``Get from VCS`` and copy paste `this github repository URI <https://github.com/nergalex/f5-bot-selenium.git>`_
     - Attach a `Python interpreter <https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html>`_
 - Download `here <https://sites.google.com/chromium.org/driver/>`_ same Chrome driver as your Chrome browser ``chrome://settings/help``
 - OPTION: for other browser, follow `this guide <https://selenium-python.readthedocs.io/installation.html#installation>`_
@@ -28,7 +28,7 @@ Local environment
 
     xattr -d com.apple.quarantine chromedriver
 
-- Open file ``requirements.txt`` and install packages:
+- Open file ``requirements.txt`` and install ONLY those packages:
 
     - selenium
     - requests
