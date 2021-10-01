@@ -155,7 +155,7 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
 
 *Clean*
 
-    - In PyCharm, stop the script by clicking
+    - In PyCharm, stop the script by clicking on the stop button i.e. a red quare
 _________________________________________
 
 Configure Integrated Bot Defense
