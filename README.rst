@@ -101,6 +101,7 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
 
 
 - Set global variables
+    - Note: CAPTCHA_API_KEY is 2CAPTCHA API key and **NOT** the the Google recaptcha site-key
 
 .. code-block:: bash
 
@@ -167,8 +168,11 @@ Configure Integrated Bot Defense
     - Open IBD iApp: ``iApps`` >>` `App Services`` >> ``Hackazon_IBD`` >> ``Reconfigure``
     - Set parameters:
         - Entry points | JS Injection Paths: GET ``/user/login``
-        - Endpoints | Paths to be Routed to Shape >> Host ``HOST_of_your_hackazon_URI``
-        - Endpoints | Paths to be Routed to Shape >> Mitigation Action ``block``
+        - Endpoints | Paths to be Routed to Shape >>
+            - Host ``HOST_of_your_hackazon_URI``
+            - Endpoint ``/user/login``
+            - Method ``POST``
+            - Mitigation Action ``block``
         - Block Data:
 
 .. code-block:: html
