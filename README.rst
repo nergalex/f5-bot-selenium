@@ -96,6 +96,7 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
    :width: 300
    :alt: setUp
 
+
 - Set global variables
 
 .. code-block:: bash
@@ -104,6 +105,12 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
         LOGIN_USER = "test_user"
         LOGIN_PASSWORD = "123456"
         CAPTCHA_API_KEY = "{{ask_your_trainer}}"
+
+- For Mac user, set local variable
+
+.. code-block:: bash
+
+        PATH = "./_files/chromedriver"
 
 - Click on the left column, as described in the picture below, to suspend the script during his future execution
 
