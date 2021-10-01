@@ -144,9 +144,6 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
    :width: 400
    :alt: go to cursor
 
-- When element ``loginbtn`` is suspended, add a Filter on transaction to catch it: ``Chrome`` >> ``DevTool`` >> ``Network`` >> filter ``method:POST``
-- "Go to cursor" and then see the POST request: note all the headers used to forward signal data to IBD
-
 *Result*
 
 - Bot succeed to login and he is redirected to ``/account``
@@ -189,7 +186,10 @@ Test 3 - bot - mitigated
 =============================================
 *Task*
 
-    - In PyCharm, run a test
+    - In PyCharm, run a test in debug mode, as done in step *Test 2*
+    - When element ``loginbtn`` is suspended, add a Filter on transaction to catch it: ``Chrome`` >> ``DevTool`` >> ``Network`` >> filter ``method:POST``
+    - "Go to cursor" and then see the POST request: note all the headers used to forward signal data to IBD
+    - Run a test again in **NO** debug mode:
 
 .. image:: ./_pictures/run_test_without_debug.png
    :align: center
