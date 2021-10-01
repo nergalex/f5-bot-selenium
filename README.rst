@@ -37,7 +37,8 @@ Local environment
 
 .. code-block:: bash
 
-    pip3.exe install 2captcha-python==1.1.0
+    PC: pip3.exe install 2captcha-python==1.1.0
+    Mac: pip3 install 2captcha-python==1.1.0
 
 _________________________________________
 
