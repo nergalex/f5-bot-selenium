@@ -209,6 +209,7 @@ Test 3 - bot - mitigated
 
     - See page ``Demo | Blocked by Shape | Demo``
     - View mitigated bot transaction in ``Cloud Services`` >> ``IBD`` >> ``Dashboard``
+    - Filter on ``Application`` >> ``hackazon-ibd``
 
 Cross-Origin Resource Sharing (CORS)
 ************************************
