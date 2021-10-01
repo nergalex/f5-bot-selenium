@@ -94,6 +94,11 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
 - In PyCharm, open ``website11.py``
 - Click on ``Structure`` and open ``setUp`` function
 
+.. image:: ./_pictures/Structure.png
+   :align: center
+   :width: 300
+   :alt: setUp
+
 .. image:: ./_pictures/Structure_setUp.png
    :align: center
    :width: 300
