@@ -196,6 +196,7 @@ Test 3 - bot - mitigated
 
     - In PyCharm, run a test in debug mode, as done in step *Test 2*
     - When element ``loginbtn`` is suspended, add a Filter on transaction to catch it: ``Chrome`` >> ``DevTool`` >> ``Network`` >> filter ``method:POST``
+    - Click on ``preserve log``
     - "Go to cursor" and then see the POST request: note all the headers used to forward signal data to IBD
     - Run a test again in **NO** debug mode:
 
