@@ -28,7 +28,8 @@ Local environment
 
     xattr -d com.apple.quarantine chromedriver
 
-- Open file ``requirements.txt`` and install **ONLY** those packages:
+- Open file ``requirements.txt``
+- Click on  ``Install requirements`` and choose **ONLY** those packages ton install:
 
     - selenium
     - requests
