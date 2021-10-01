@@ -79,6 +79,7 @@ A ``site key`` and a ``secret key`` was added in Application's code.
 *Task*
 
     - Use `2captcha user guide <https://2captcha.com/2captcha-api#solving_recaptchav2_new>`_ to find the ``site key``
+    - You do not need to read after step 3
 
 *Note*
 
