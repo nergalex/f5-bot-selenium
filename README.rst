@@ -78,7 +78,7 @@ A ``site key`` and a ``secret key`` was added in Application's code.
 
 *Task*
 
-    - Just to understand 2CAPTCHA, use `2captcha user guide <https://2captcha.com/2captcha-api#solving_recaptchav2_new>`_ to find the ``site key``
+    - Use `2captcha user guide <https://2captcha.com/2captcha-api#solving_recaptchav2_new>`_ to find the ``site key``
     - You do not need to read after step 3
 
 *Note*
@@ -151,6 +151,7 @@ Test 2 - bot - bypass CAPTCHA, viva 2CATPCHA!
    :width: 400
    :alt: go to cursor
 
+- When element ``solveGRecaptcha`` function is suspended, check that ``site_key`` variable as the same value as the one you found in the previous exercise
 - When element ``loginbtn`` is suspended, add a Filter on transaction to catch it: ``Chrome`` >> ``DevTool`` >> ``Network`` >> filter ``method:POST``
 - "Go to cursor" and then see the POST request: note the ``g-recaptcha-response`` info in the form request
 
