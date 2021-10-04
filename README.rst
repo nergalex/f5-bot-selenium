@@ -29,10 +29,19 @@ Local environment
     xattr -d com.apple.quarantine chromedriver
 
 - Open file ``requirements.txt``
-- Click on  ``Install requirements`` and choose **ONLY** those packages ton install:
+- Click on  ``Install requirements``
 
-    - selenium
-    - requests
+.. image:: ./_pictures/Install_requirements.png
+   :align: center
+   :width: 300
+   :alt: setUp
+
+- Choose **ONLY** those packages ton install: ``selenium``, ``requests``
+
+.. image:: ./_pictures/no_install_2captcha.png
+   :align: center
+   :width: 300
+   :alt: setUp
 
 - Install *2captcha-python* package: at the bottom left of the window, open a Terminal
 
