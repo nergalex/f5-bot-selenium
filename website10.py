@@ -47,56 +47,16 @@ class Flow1(unittest.TestCase):
         self.session = requests.session()
         self.driver.get(URI)
 
-        # GeeTest
+        # Check presence of GeeTest
         element = self.getElementTagName("script")[1]
         uri_parsed = urlparse.urlparse(element.get_attribute("src"))
         if uri_parsed.hostname == 'ct.captcha-delivery.com':
-            # GET GeeTest specifications
-            geetest = self.getCurrentGeeTest()
-
-            # GET a new GeeTest challenge
-            geetest['challenge'] = self.getNewGeeTestChallenge(geetest['url'])
-
-            # SOLVE
-            geetest_result = self.solveGeeTest(
-                gt=geetest['gt'],
-                challenge=geetest['challenge'],
-                url=geetest['url']
-            )
-
-            # SET GeeTest
-            self.setGeeTestResult(geetest_result)
-
-            # wait for Gcaptcha check
-            time.sleep(5)
-
-            # GET GeeTest specifications
-            geetest = self.getCurrentGeeTest()
-
-            # GET a new GeeTest challenge
-            geetest['challenge'] = self.getNewGeeTestChallenge(geetest['url'])
-
-            # SOLVE
-            geetest_result = self.solveGeeTest(
-                gt=geetest['gt'],
-                challenge=geetest['challenge'],
-                url=geetest['url']
-            )
-
-            # SET GeeTest
-            self.setGeeTestResult(geetest_result)
-
-            # wait for Gcaptcha check
-            time.sleep(5)
-
-        # No CAPTCHA
+            self.workflowSolveGeetest()
         else:
             print("No CAPTCHA")
 
-        # Move
-        TouchActions(self.driver).scroll(10, 10).perform()
-
         # Accept data privacy
+        time.sleep(5)
         element = self.getElementId("didomi-notice-agree-button")
         self.clickButton(element)
 
@@ -108,30 +68,80 @@ class Flow1(unittest.TestCase):
         element = self.driver.find_elements_by_class_name("aside-btn")[0]
         self.clickButton(element)
 
-        # GeeTest
+        # Check GeeTest
         element = self.getElementTagName("script")[1]
         uri_parsed = urlparse.urlparse(element.get_attribute("src"))
         if uri_parsed.hostname == 'ct.captcha-delivery.com':
-            # GET GeeTest specifications
-            geetest = self.getCurrentGeeTest()
+            self.workflowSolveGeetest()
+        else:
+            print("No CAPTCHA")
 
-            # GET a new GeeTest challenge
-            geetest['challenge'] = self.getNewGeeTestChallenge(geetest['url'])
+        # Mon adresse email
+        element = self.getElementId("j_username")
+        self.setForm(element=element, input_data=LOGIN_EMAIL)
 
-            # SOLVE
-            geetest_result = self.solveGeeTest(
-                gt=geetest['gt'],
-                challenge=geetest['challenge'],
-                url=geetest['url']
-            )
+        # Mon mot de passe
+        element = self.getElementId("j_password")
+        self.setForm(element=element, input_data=LOGIN_PASSWORD)
 
-            # SET GeeTest
-            self.setGeeTestResult(geetest_result)
+        # Je me connecte
+        element = self.getElementClass("btn-green-slide")
+        self.clickButton(element)
 
-            # wait for Gcaptcha check
-            time.sleep(5)
+        # Test credentials
+        print("Credential success!")
+
+        # Go to Profil page
+        uri_browse = URI + "/compte/profil"
+        self.driver.get(uri_browse)
+
+        # Mon Profil
+        time.sleep(2)
+        elements_label = self.driver.find_elements_by_class_name("label")
+        elements_value = self.driver.find_elements_by_class_name("value")
+        element_client_id = self.getElementClass("customer-externalRef-block")
+
+        # Data leak
+        print("personal info leaked:")
+        for index, label in enumerate(elements_label):
+            print("- %s: %s" % (label.text, elements_value[index].text))
+        print("- MON IDENTIFIANT CLIENT: %s" % element_client_id.text)
+
+        # Go to Avantage page
+        uri_browse = URI + "/compte/avantages"
+        self.driver.get(uri_browse)
 
         time.sleep(1000)
+
+    def workflowSolveGeetest(self):
+        # Move
+        moove_cursor = ActionChains(self.driver)
+        previous_x = 0
+        previous_y = 0
+        target_x = 150
+        target_y = 800
+
+        for i in range(1, 100):
+            previous_x = random.uniform(previous_x, target_x)
+            previous_y = random.uniform(previous_y, target_y)
+            moove_cursor = moove_cursor.move_by_offset(previous_x, previous_y)
+        moove_cursor.perform()
+
+        # GET GeeTest specifications
+        geetest = self.getCurrentGeeTest()
+
+        # GET a new GeeTest challenge
+        geetest['challenge'] = self.getNewGeeTestChallenge(geetest['url'])
+
+        # SOLVE
+        geetest_result = self.solveGeeTest(
+            gt=geetest['gt'],
+            challenge=geetest['challenge'],
+            url=geetest['url']
+        )
+
+        # SET GeeTest
+        self.setGeeTestResult(geetest_result)
 
     def tearDown(self):
         self.driver.close()
@@ -257,7 +267,7 @@ class Flow1(unittest.TestCase):
 
         # wait
         print("2CAPTCHA - try to solve, please wait a minute...")
-        time.sleep(30)
+        time.sleep(45)
 
         # GET results
         request_id = json.loads(r_post.text)['request']
@@ -430,7 +440,7 @@ if __name__ == "__main__":
     LOGIN_EMAIL = "INPUT"
     LOGIN_PASSWORD = "INPUT"
     CAPTCHA_API_KEY = "INPUT"
-    USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"
+    USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
     config = {
         'server': '2captcha.com',
         'apiKey': CAPTCHA_API_KEY,
