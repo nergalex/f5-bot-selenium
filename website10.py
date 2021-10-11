@@ -249,6 +249,17 @@ class Flow1(unittest.TestCase):
         print("  challenge: '%s' " % challenge)
         print("  url: %s " % url)
 
+        # SOLVE via TwoCaptcha class
+        # print("2CAPTCHA via TwoCaptcha class - try to solve, please wait a minute...")
+        # try:
+        #     captcha_result = solver.geetest(
+        #         gt=gt,
+        #         challenge=challenge,
+        #         url=url
+        #     )
+        # except Exception as e:
+        #     print("2CAPTCHA via TwoCaptcha class - error %s" % e.args[0])
+
         # SOLVE via API
         data = {
             "key": CAPTCHA_API_KEY,
@@ -266,7 +277,7 @@ class Flow1(unittest.TestCase):
             raise
 
         # wait
-        print("2CAPTCHA - try to solve, please wait a minute...")
+        print("2CAPTCHA via API - try to solve, please wait a minute...")
         time.sleep(45)
 
         # GET results
@@ -284,18 +295,6 @@ class Flow1(unittest.TestCase):
             print("2CAPTCHA - GeeTest solved:")
             pprint.pprint(json.loads(r_get.text)['request'])
             return json.loads(r_get.text)['request']
-
-        # SOLVE via Python class - ERROR
-        # try:
-        #     captcha_result = solver.geetest(
-        #         gt=gt,
-        #         challenge=challenge,
-        #         url=url
-        #     )
-        # except Exception as e:
-        #     print("2CAPTCHA - error %s" % e.args[0])
-        #     time.sleep(90)
-        # print("2CAPTCHA - grecaptcha v2 solved: '%s' " % captcha_result['code'])
 
     def setGeeTestResult(self, geetest):
         # SEND a message to iframe in order to launch Callback
