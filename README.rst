@@ -177,6 +177,9 @@ _________________________________________
 
 Configure Integrated Bot Defense
 =========================================
+
+More details in Integrated Bot Defense `admin guide <https://f5cloudservices.zendesk.com/hc/en-us/categories/1500000490201-Integrated-Bot-Defense>`_
+
 *Task*
 
     - View detected human and bot transaction in ``Cloud Services`` >> ``IBD`` >> ``Dashboard``

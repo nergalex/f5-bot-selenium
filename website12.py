@@ -97,6 +97,7 @@ class Flow1(unittest.TestCase):
             # if uri_parsed.hostname == 'geo.captcha-delivery.com':
             if uri_parsed.hostname == 'ct.captcha-delivery.com':
                 self.workflowSolveGeetest()
+                time.sleep(5)
 
         # Login
         element = self.getElementId("login")
@@ -105,7 +106,6 @@ class Flow1(unittest.TestCase):
         # Submit
         element = self.getElementClass("mcf-btn--lg")
         self.clickButton(element)
-        time.sleep(1000)
 
         # Password
         element = self.getElementId("password")
@@ -125,9 +125,16 @@ class Flow1(unittest.TestCase):
         # Go to info perso
         time.sleep(5)
         self.driver.get(URI_INFO_PERSO)
+        time.sleep(5)
+
+        # Check presence of GeeTest
+        element = self.getElementTagName("script")[1]
+        uri_parsed = urlparse.urlparse(element.get_attribute("src"))
+        if uri_parsed.hostname == 'ct.captcha-delivery.com':
+            self.workflowSolveGeetest()
+            time.sleep(5)
 
         # Mon Profil
-        time.sleep(2)
         elements = self.driver.find_elements_by_class_name("epi-sub-title")
 
         # Data leak
@@ -135,55 +142,46 @@ class Flow1(unittest.TestCase):
         for index, element in enumerate(elements):
             print("- %s" % element.text)
 
+        time.sleep(1000)
+
         # Go to contrat
-        self.driver.get(URI_CONTRAT)
-        time.sleep(2)
+        # self.driver.get(URI_CONTRAT)
+        # time.sleep(2)
 
         # Check presence of GeeTest
-        element = self.getElementTagName("script")[1]
-        uri_parsed = urlparse.urlparse(element.get_attribute("src"))
-        if uri_parsed.hostname == 'ct.captcha-delivery.com':
-            self.workflowSolveGeetest()
-
-        time.sleep(1000)
+        # element = self.getElementTagName("script")[1]
+        # uri_parsed = urlparse.urlparse(element.get_attribute("src"))
+        # if uri_parsed.hostname == 'ct.captcha-delivery.com':
+        #     self.workflowSolveGeetest()
 
         # Contracts
-        elements_contract_type = self.driver.find_elements_by_class_name("epi-title")
-
-        print("contract leaked:")
-        contract_enumerate = len(elements_contract_type)
-        for index_contract in range(0, contract_enumerate):
-            # Go to contract
-            elements_contract_name = self.driver.find_elements_by_class_name("epi-subtitle")
-            print("- contract %s:  %s" % (
-                elements_contract_type[index_contract].text, elements_contract_name[index_contract].text))
-            self.clickButton(elements_contract_type[index_contract])
-            time.sleep(2)
-
-            # Get fee
-            element = self.getElementClass("annual-fee")
-            print("   +-- annual-fee:  %s" % element.text)
-
-            # Get info
-            elements_label = self.driver.find_elements_by_class_name("title")
-            elements_value = self.driver.find_elements_by_class_name("value")
-
-            for index2, label in enumerate(elements_label):
-                print("   +-- %s: %s" % (label.text, elements_value[index2].text))
-
-            # Go back
-            self.driver.get(URI_CONTRAT)
-            time.sleep(2)
-            elements_contract_type = self.driver.find_elements_by_class_name("epi-title")
-
-        # Check GeeTest
-        time.sleep(3)
-        element = self.getElementTagName("script")[1]
-        uri_parsed = urlparse.urlparse(element.get_attribute("src"))
-        if uri_parsed.hostname == 'ct.captcha-delivery.com':
-            self.workflowSolveGeetest()
-
-        time.sleep(1000)
+        # elements_contract_type = self.driver.find_elements_by_class_name("epi-title")
+        #
+        # print("contract leaked:")
+        # contract_enumerate = len(elements_contract_type)
+        # for index_contract in range(0, contract_enumerate):
+        #     # Go to contract
+        #     elements_contract_name = self.driver.find_elements_by_class_name("epi-subtitle")
+        #     print("- contract %s:  %s" % (
+        #         elements_contract_type[index_contract].text, elements_contract_name[index_contract].text))
+        #     self.clickButton(elements_contract_type[index_contract])
+        #     time.sleep(2)
+        #
+        #     # Get fee
+        #     element = self.getElementClass("annual-fee")
+        #     print("   +-- annual-fee:  %s" % element.text)
+        #
+        #     # Get info
+        #     elements_label = self.driver.find_elements_by_class_name("title")
+        #     elements_value = self.driver.find_elements_by_class_name("value")
+        #
+        #     for index2, label in enumerate(elements_label):
+        #         print("   +-- %s: %s" % (label.text, elements_value[index2].text))
+        #
+        #     # Go back
+        #     self.driver.get(URI_CONTRAT)
+        #     time.sleep(2)
+        #     elements_contract_type = self.driver.find_elements_by_class_name("epi-title")
 
     def workflowSolveGeetest(self):
         # Move

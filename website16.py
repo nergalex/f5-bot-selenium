@@ -1,3 +1,4 @@
+import pprint
 import time
 import unittest
 import random
@@ -10,21 +11,26 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from twocaptcha import TwoCaptcha
-import os
-import pprint
 import urllib.parse as urlparse
 from urllib.parse import parse_qs
+import json
+import requests
+import re
 
 
 class Flow1(unittest.TestCase):
 
     def setUp(self):
-        global URI, LOGIN_EMAIL, LOGIN_PASSWORD, CAPTCHA_API_KEY, solver
-        PATH = "./_files/chromedriver.exe"
+        global URI, LOGIN_USER, LOGIN_PASSWORD, CAPTCHA_API_KEY, solver, USER_AGENT
         URI = "INPUT"
-        LOGIN_EMAIL = "INPUT"
+        LOGIN_USER = "INPUT"
         LOGIN_PASSWORD = "INPUT"
         CAPTCHA_API_KEY = "INPUT"
+
+        # local
+        PATH = "./_files/chromedriver.exe"
+        USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36"
+
         config = {
             'server': '2captcha.com',
             'apiKey': CAPTCHA_API_KEY,
@@ -54,34 +60,23 @@ class Flow1(unittest.TestCase):
             options=options
         )
         self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-        self.driver.execute_cdp_cmd('Network.setUserAgentOverride', {
-            "userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'})
-        print(self.driver.execute_script("return navigator.userAgent;"))
+        self.driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": USER_AGENT})
+        print("Run Selenium bot with User Agent: %s" % self.driver.execute_script("return navigator.userAgent;"))
 
     def test_login(self):
+        self.session = requests.session()
         self.driver.get(URI)
 
-        # Move
-        TouchActions(self.driver).scroll(10, 10).perform()
-
-        # Accept data privacy
-        element = self.getElementClass("ucm-choice__yes")
-        self.clickButton(element)
-
-        # Connect
-        element = self.getElementClass("lv-header-icon-account")
-        self.clickButton(element)
-
         # Login
-        element = self.getElementName("lv-header-login-form__sign-in__form__email")
-        self.setForm(element=element, input_data=LOGIN_EMAIL)
+        element = self.getElementId("login-form-username")
+        self.setForm(element=element, input_data=LOGIN_USER)
 
         # Password
-        element = self.getElementName("lv-header-login-form__sign-in__form__password")
+        element = self.getElementId("login-form-password")
         self.setForm(element=element, input_data=LOGIN_PASSWORD)
 
-        # Continue
-        element = self.getElementClass("lv-header-login-form__button")
+        # Submit
+        element = self.getElementId("login-form-submit")
         self.clickButton(element)
 
         time.sleep(1000)
@@ -136,6 +131,20 @@ class Flow1(unittest.TestCase):
             return None
         return element
 
+    def getElementTagName(self, tag_name):
+        try:
+            WebDriverWait(self.driver, 2).until(
+                expected_conditions.presence_of_element_located((By.TAG_NAME, tag_name))
+            )
+        except TimeoutException:
+            print("Oops!  Too long to retrieve element '%s'" % tag_name)
+        try:
+            elements = self.driver.find_elements_by_tag_name(tag_name)
+        except NoSuchElementException:
+            print("Oops!  There is no valid element '%s'" % tag_name)
+            return None
+        return elements
+
     def getElementClass(self, element_class):
         try:
             WebDriverWait(self.driver, 2).until(
@@ -162,8 +171,26 @@ class Flow1(unittest.TestCase):
             print("Oops!  There is no valid element '%s'" % element_name)
         return element
 
+    def solveGRecaptcha(self, site_key, url):
+        print("2CAPTCHA - grecaptcha v2 site key: '%s' " % site_key)
+        print("2CAPTCHA - try to solve, please wait a minute...")
+
+        # SOLVE
+        try:
+            captcha_result = solver.recaptcha(
+                sitekey=site_key,
+                url=url,
+                version='v2',
+                enterprise=0
+            )
+        except Exception as e:
+            print("2CAPTCHA - error %s" % e.args[0])
+            time.sleep(90)
+        print("2CAPTCHA - grecaptcha v2 solved: '%s' " % captcha_result['code'])
+
+        return captcha_result['code']
+
 
 if __name__ == "__main__":
 
     unittest.main()
-
