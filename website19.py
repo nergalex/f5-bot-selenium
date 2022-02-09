@@ -21,10 +21,11 @@ import re
 class Flow1(unittest.TestCase):
 
     def setUp(self):
-        global URI, LOGIN_USER, LOGIN_PASSWORD, CAPTCHA_API_KEY, solver, USER_AGENT
+        global URI, LOGIN_USER, LOGIN_PASSWORD, LOGIN_BIRTHDAY, CAPTCHA_API_KEY, solver, USER_AGENT
         URI = "INPUT"
         LOGIN_USER = "INPUT"
         LOGIN_PASSWORD = "INPUT"
+        LOGIN_BIRTHDAY = "INPUT"
         CAPTCHA_API_KEY = "INPUT"
 
         # local
@@ -65,116 +66,72 @@ class Flow1(unittest.TestCase):
 
     def test_login(self):
         self.session = requests.session()
+
+        # goto welcome page
         self.driver.get(URI)
-
-        # Check captcha
-        frames = self.driver.find_elements_by_tag_name("iframe")
-
-        if len(frames) > 0:
-            frame = self.driver.find_elements_by_tag_name("iframe")[0]
-            uri_parsed = urlparse.urlparse(frame.get_attribute("src"))
-            if uri_parsed.hostname == 'geo.captcha-delivery.com':
-                # GET Gcaptcha
-                (site_key, url) = self.getGRecaptcha()
-
-                # Solve Gcaptcha
-                self.solveGRecaptcha(
-                    site_key=site_key,
-                    url=url
-                )
+        time.sleep(3)
 
         # Accept data privacy
-        element = self.getElementId("popin_tc_privacy_button_3")
+        element = self.getElementId("popin_tc_privacy_button_2")
+        self.clickButton(element)
+
+        # User account
+        element = self.getElementClass("icon-header-user")
         self.clickButton(element)
 
         # Login
-        element = self.getElementId("formz-authentification-form-login")
+        element = self.getElementId("wsi-login-credentials-form-email-input-input")
         self.setForm(element=element, input_data=LOGIN_USER)
 
         # Password
-        element = self.getElementId("formz-authentification-form-password")
+        element = self.getElementId("wsi-login-credentials-form-password-input-input")
         self.setForm(element=element, input_data=LOGIN_PASSWORD)
 
+        # Birth date
+        element = self.getElementId("wsi-login-credentials-form-birthdate-input-input")
+        self.setForm(element=element, input_data=LOGIN_BIRTHDAY)
+
         # Submit
-        element = self.getElementClass("js--btn-validation")
+        element = self.getElementId("wsi-authenticate-button")
         self.clickButton(element)
+        time.sleep(1)
 
-        # Check captcha
-        frames = self.driver.find_elements_by_tag_name("iframe")
-        if len(frames) > 0:
-            frame = self.driver.find_elements_by_tag_name("iframe")[0]
-            uri_parsed = urlparse.urlparse(frame.get_attribute("src"))
-            if uri_parsed.hostname == 'geo.captcha-delivery.com':
-                # GET Gcaptcha
-                (site_key, url) = self.getGRecaptcha()
+        # Skip
+        # element = self.getElementId("wsi-post-authentication-skip-optional-layers")
+        # if element is not None:
+        #     self.clickButton(element)
+        #     time.sleep(1)
 
-                # Solve Gcaptcha
-                self.solveGRecaptcha(
-                    site_key=site_key,
-                    url=url
-                )
+        # MyAccount
+        element = self.getElementClass("main-nav_connect-user_myaccount")
+        self.clickButton(element)
+        time.sleep(1)
 
-                # Login
-                element = self.getElementId("formz-authentification-form-login")
-                self.setForm(element=element, input_data=LOGIN_USER)
+        # Retrait
+        element = self.getElementId("wsi-connected-layer-summary-wallets-withdrawal-button")
+        self.clickButton(element)
+        time.sleep(1)
 
-                # Password
-                element = self.getElementId("formz-authentification-form-password")
-                self.setForm(element=element, input_data=LOGIN_PASSWORD)
+        # Completer
+        element = self.getElementClass("action-link-btFournirMapiece-origin")
+        self.clickButton(element)
+        time.sleep(1)
 
-                # Submit
-                element = self.getElementClass("js--btn-validation")
-                self.clickButton(element)
+        # IBAN
+        element = self.getElementId("ibanNumber")
+        IBAN = "12345678901234567890"
+        self.setForm(element=element, input_data=IBAN)
+
+        # GET gain
+        element = self.getElementClass("main-nav_connect-user_infos-amount")
+        GAIN = element.text.split(' ')
+
+        # Virement
+        element = self.driver.find_elements_by_class_name("ng-pristine")[2]
+        element.clear()
+        self.setForm(element=element, input_data=GAIN)
 
         time.sleep(1000)
-
-    def getGRecaptcha(self):
-
-        # Inject client to receive message from frame geo.captcha and set attribute title
-        self.driver.switch_to.default_content()
-        js_script = "function receiveMessage(event) { " + \
-                    "iframe = document.getElementsByTagName('iframe')[0]; " + \
-                    "iframe.setAttribute(name='title', event.data);" + \
-                    "} " + \
-                    "window.addEventListener('message', receiveMessage, false);"
-        self.driver.execute_script(js_script)
-
-        # SEND a message to iframe in order to receive a site_key back
-        js_script = "iframe = document.getElementsByTagName('iframe')[0]; " + \
-                    "iframe.contentWindow.postMessage('getSiteKey', '*');"
-        self.driver.execute_script(js_script)
-
-        # lookup for site_key
-        frame = self.driver.find_elements_by_tag_name("iframe")[0]
-        uri_parsed = urlparse.urlparse(frame.get_attribute("title"))
-        site_key = parse_qs(uri_parsed.query)['k'][0]
-        url = frame.get_attribute("src")
-        return site_key, url
-
-    def solveGRecaptcha(self, site_key, url):
-        print("2CAPTCHA - grecaptcha v2 site key: '%s' " % site_key)
-        print("2CAPTCHA - try to solve, please wait a minute...")
-
-        # SOLVE
-        try:
-            captcha_result = solver.recaptcha(
-                sitekey=site_key,
-                url=url,
-                version='v2',
-                enterprise=0
-            )
-        except Exception as e:
-            print("2CAPTCHA - error %s" % e.args[0])
-            time.sleep(90)
-        print("2CAPTCHA - grecaptcha v2 solved: '%s' " % captcha_result['code'])
-
-        # SEND a message to iframe in order to launch Callback
-        post_message_data = "captchaCallback=" + str(captcha_result['code'])
-        js_script = "iframe = document.getElementsByTagName('iframe')[0]; " + \
-                    "iframe.contentWindow.postMessage('" + \
-                    post_message_data + \
-                    "', '*');"
-        self.driver.execute_script(js_script)
 
     def tearDown(self):
         self.driver.close()
@@ -265,6 +222,25 @@ class Flow1(unittest.TestCase):
         except NoSuchElementException:
             print("Oops!  There is no valid element '%s'" % element_name)
         return element
+
+    def solveGRecaptcha(self, site_key, url):
+        print("2CAPTCHA - grecaptcha v2 site key: '%s' " % site_key)
+        print("2CAPTCHA - try to solve, please wait a minute...")
+
+        # SOLVE
+        try:
+            captcha_result = solver.recaptcha(
+                sitekey=site_key,
+                url=url,
+                version='v2',
+                enterprise=0
+            )
+        except Exception as e:
+            print("2CAPTCHA - error %s" % e.args[0])
+            time.sleep(90)
+        print("2CAPTCHA - grecaptcha v2 solved: '%s' " % captcha_result['code'])
+
+        return captcha_result['code']
 
 
 if __name__ == "__main__":
