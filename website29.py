@@ -24,8 +24,7 @@ class Flow1(unittest.TestCase):
 
     def setUp(self):
         global BASE_PATH, LOGIN_USER, LOGIN_PASSWORD, CAPTCHA_API_KEY, solver, USER_AGENT
-        BASE_PATH = "http://juiceshop-poc.fr"
-        # BASE_PATH = "http://juice-shop.fr"
+        BASE_PATH = "https://juiceshop1.f5app.dev"
         LOGIN_USER = "al.dacosta@f5.com"
         LOGIN_PASSWORD = "Ju1ceShop!"
         CAPTCHA_API_KEY = "INPUT"
@@ -72,7 +71,7 @@ class Flow1(unittest.TestCase):
         # goto welcome page
         uri_login = BASE_PATH + "/#/login"
         self.driver.get(uri_login)
-        time.sleep(0.2)
+        time.sleep(1)
 
         # Data Privacy
         element = self.driver.find_elements_by_class_name("close-dialog")[0]
@@ -95,13 +94,14 @@ class Flow1(unittest.TestCase):
             # Submit
             element = self.getElementId("loginButton")
             self.clickButton(element)
-            time.sleep(0.2)
+            time.sleep(0.5)
 
             # goto payment page
             uri_payment = BASE_PATH + "/#/saved-payment-methods"
             self.driver.get(uri_payment)
             time.sleep(0.2)
 
+            """
             # GET personal info
             element = self.driver.find_elements_by_class_name("cdk-column-Number")[1]
             pprint.pprint("Partial card number: %s" % element.text)
@@ -111,8 +111,21 @@ class Flow1(unittest.TestCase):
 
             element = self.driver.find_elements_by_class_name("cdk-column-Expiry")[1]
             pprint.pprint("Expiration date: %s" % element.text)
+            """
 
-            time.sleep(1000)
+            # Account
+            element = self.getElementId("navbarAccount")
+            self.clickButton(element)
+
+            # logout
+            element = self.getElementId("navbarLogoutButton")
+            self.clickButton(element)
+            time.sleep(1)
+
+            # goto welcome page
+            uri_login = BASE_PATH + "/#/login"
+            self.driver.get(uri_login)
+            time.sleep(0.5)
 
     def get_random_string(self):
         length = 10
