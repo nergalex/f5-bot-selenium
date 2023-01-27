@@ -25,8 +25,8 @@ class Flow1(unittest.TestCase):
     def setUp(self):
         global BASE_PATH, LOGIN_USER, LOGIN_PASSWORD, CAPTCHA_API_KEY, solver, USER_AGENT
         BASE_PATH = "https://juiceshop1.f5app.dev"
-        LOGIN_USER = "al.dacosta@f5.com"
-        LOGIN_PASSWORD = "Ju1ceShop!"
+        LOGIN_USER = "test@acme.com"
+        LOGIN_PASSWORD = "T3stMe!"
         CAPTCHA_API_KEY = "INPUT"
 
         # local
